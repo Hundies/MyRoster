@@ -4,31 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="color-scheme" content="light only">
-<meta name="supported-color-schemes" content="light">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#1f221d">
+<meta name="supported-color-schemes" content="dark">
 <title>근무표</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
   :root {
-    --bg:#f7f7f3;--white:#ffffff;--surface2:#f1f2ec;
-    --border:#e3e4dc;--border2:#cfd1c5;
-    --accent:#8a9a6b;--accent-light:#e9eedf;
-    --red:#c2665e;--red-bg:#f8ece9;
-    --green:#6f8a5c;--yellow:#c9a85c;
-    --text:#3d4035;--text-sub:#5d6152;--text-muted:#9a9d8c;
-    --lee:#5fb39a;--lee-bg:#cdeee3;--lee-border:#a9ddcc;
-    --shin:#7f9cbb;--shin-bg:#e6edf4;--shin-border:#cfdbe8;
-    --hong:#9a86c4;--hong-bg:#eee9f6;--hong-border:#dcd2ee;
-    --all-bg:#faf5e6;--all-border:#e8dcb4;--all-text:#8a7442;
+    --bg:#151714;--white:#1f221d;--surface2:#282b25;
+    --border:#33372f;--border2:#454a3f;
+    --accent:#93a86f;--accent-light:#2c3324;
+    --red:#e0847b;--red-bg:#3a2522;
+    --green:#93b07c;--yellow:#d9bb6e;
+    --text:#e6e8df;--text-sub:#b9bcae;--text-muted:#858979;
+    --lee:#6cc4a8;--lee-bg:#1e3a32;--lee-border:#2f5a4c;
+    --shin:#93b1d1;--shin-bg:#222c37;--shin-border:#34465a;
+    --hong:#ae9ad8;--hong-bg:#2b2538;--hong-border:#43395a;
+    --all-bg:#332d1e;--all-border:#5a4e2e;--all-text:#d9bf85;
   }
+  input,select{color-scheme:dark;}
   *{box-sizing:border-box;margin:0;padding:0;}
   html,body{height:100%;overflow:hidden;}
-  body{font-family:'Noto Sans KR',sans-serif;background:#f7f7f3;color:#3d4035;
+  body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);
     display:flex;flex-direction:column;overscroll-behavior:none;
     -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
   .main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:none;
-    padding:10px 0;max-width:900px;margin:0 auto;background:#f7f7f3;width:100%;}
+    padding:10px 0;max-width:900px;margin:0 auto;background:var(--bg);width:100%;}
   header{background:var(--white);border-bottom:1px solid var(--border);padding:0 16px;height:58px;
     display:flex;align-items:center;gap:8px;flex-shrink:0;
     box-shadow:0 1px 4px rgba(100,80,50,0.08);}
@@ -65,18 +67,18 @@
   .day-cell.other-month{opacity:.20;pointer-events:none;}
   .day-cell.holiday-cell{background:var(--white);}
   .day-cell.noallow-cell{background:var(--white);}
-  .day-cell.today-cell{background:#f0f4e8;}
+  .day-cell.today-cell{background:#263021;}
 
   .day-top-row{height:16px;margin-bottom:1px;display:flex;align-items:center;overflow:visible;}
   .date-box{display:flex;align-items:center;justify-content:space-between;
     background:transparent;border:none;padding:0;width:100%;height:16px;overflow:visible;}
   .date-box-left{display:flex;align-items:center;gap:1px;flex-shrink:0;}
   .date-box .d-num{font-size:0.78rem;font-weight:700;font-family:'Noto Sans KR',sans-serif;line-height:1.2;white-space:nowrap;flex-shrink:0;}
-  .date-box.normal .d-num{color:#3d4035;}
-  .date-box.red .d-num{color:#c2665e;}
-  .date-box.blue .d-num{color:#5f86b3;}
-  .date-box.gray .d-num{color:#a8aa9b;}
-  .date-box.dim .d-num{color:#c7c9bd;}
+  .date-box.normal .d-num{color:var(--text);}
+  .date-box.red .d-num{color:#e0847b;}
+  .date-box.blue .d-num{color:#8ab0dc;}
+  .date-box.gray .d-num{color:#7a7e70;}
+  .date-box.dim .d-num{color:#555a4d;}
   .today-cell .date-box .d-num{
     font-weight:800;color:#fff;
     background:var(--accent);
@@ -89,7 +91,7 @@
     padding:1px 0 0 0;margin:0;
     flex-shrink:0;
   }
-  .date-box .d-hol{font-weight:700;color:#c2665e;
+  .date-box .d-hol{font-weight:700;color:#e0847b;
     white-space:nowrap;overflow:hidden;
     line-height:1.2;flex-shrink:1;min-width:0;
     font-size:0.42rem;text-align:right;}
@@ -104,8 +106,8 @@
     flex-direction:column;gap:0;overflow:visible;}
   .worker-tag.hong{background:#b3a2d6;color:#fff;border:1px solid #a492ca;font-weight:600;}
   .worker-tag.shin{background:#8aa4bf;color:#fff;border:1px solid #7b96b2;font-weight:600;}
-  .off-small-tag{font-size:clamp(0.3rem,2.2vw,0.58rem);color:#fff;background:#aeb0a3;
-    border:1px solid #a1a396;border-radius:3px;padding:0px 3px;width:100%;
+  .off-small-tag{font-size:clamp(0.3rem,2.2vw,0.58rem);color:#fff;background:#5f6357;
+    border:1px solid #6c7063;border-radius:3px;padding:0px 3px;width:100%;
     text-align:center;line-height:1.1;display:flex;align-items:center;justify-content:center;
     white-space:nowrap;overflow:visible;
     -webkit-user-select:none;user-select:none;font-weight:600;}
@@ -163,12 +165,12 @@
   .total-row td{background:var(--accent-light)!important;font-weight:800;color:var(--accent);border-top:2px solid var(--border2);}
 
   /* 근무 요일 설정 */
-  #schedSetting{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1101;background:#fff;border-radius:18px;
+  #schedSetting{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1101;background:var(--white);border-radius:18px;
     box-shadow:0 8px 40px rgba(0,0,0,0.2);width:350px;max-width:94vw;max-height:88vh;overflow-y:auto;padding:18px 14px;font-family:'Noto Sans KR',sans-serif;}
   .ss-title{text-align:center;font-size:1rem;font-weight:800;color:var(--text);margin-bottom:14px;}
   .ss-row-date{display:flex;align-items:center;justify-content:space-between;background:var(--bg);border-radius:10px;padding:8px 10px;margin-bottom:10px;
     font-size:0.8rem;font-weight:700;color:var(--text-sub);}
-  .ss-row-date input{font-family:inherit;font-size:0.85rem;border:1px solid var(--border);border-radius:8px;padding:4px 6px;background:#fff;color:var(--text);}
+  .ss-row-date input{font-family:inherit;font-size:0.85rem;border:1px solid var(--border);border-radius:8px;padding:4px 6px;background:var(--white);color:var(--text);}
   .ss-line{display:flex;align-items:center;gap:6px;margin-bottom:8px;}
   .ss-label{width:58px;flex-shrink:0;font-size:0.68rem;font-weight:700;line-height:1.2;}
   .ss-label small{display:block;font-size:0.56rem;font-weight:500;color:var(--text-muted);}
@@ -180,14 +182,14 @@
   .ss-msg{font-size:0.7rem;color:var(--red);min-height:1em;text-align:center;margin:4px 0;}
   .ss-btns{display:flex;gap:8px;margin:6px 0 14px;}
   .ss-btns button{flex:1;padding:11px;border-radius:10px;font-family:inherit;font-size:0.88rem;font-weight:700;cursor:pointer;}
-  .ss-cancel{border:1.5px solid var(--border);background:#fff;color:var(--text-sub);}
+  .ss-cancel{border:1.5px solid var(--border);background:var(--white);color:var(--text-sub);}
   .ss-save{border:none;background:#7ccab2;color:#fff;}
   .ss-hist-title{font-size:0.78rem;font-weight:800;color:var(--text-sub);border-top:1px solid var(--border);padding-top:10px;margin-bottom:6px;}
   .ss-hist{display:flex;align-items:center;gap:6px;background:var(--bg);border-radius:8px;padding:7px 8px;margin-bottom:5px;font-size:0.66rem;color:var(--text-sub);line-height:1.45;}
   .ss-hist b{color:var(--text);font-size:0.72rem;}
-  .ss-hist .ss-del{margin-left:auto;flex-shrink:0;border:1px solid #ead2cd;background:#fbf0ee;color:#c2665e;border-radius:6px;padding:4px 7px;font-family:inherit;font-size:0.64rem;font-weight:700;cursor:pointer;}
+  .ss-hist .ss-del{margin-left:auto;flex-shrink:0;border:1px solid #5a3530;background:#3a2522;color:#e0847b;border-radius:6px;padding:4px 7px;font-family:inherit;font-size:0.64rem;font-weight:700;cursor:pointer;}
   /* 재고 요약본 (보고용 캡처) */
-  .ssum-card{background:#fff;border-radius:16px;padding:16px 16px 14px;font-family:'Noto Sans KR',sans-serif;box-shadow:0 8px 32px rgba(0,0,0,0.18);}
+  .ssum-card{background:var(--white);border-radius:16px;padding:16px 16px 14px;font-family:'Noto Sans KR',sans-serif;box-shadow:0 8px 32px rgba(0,0,0,0.18);}
   .ssum-head{text-align:center;margin-bottom:14px;}
   .ssum-title{font-size:1.05rem;font-weight:800;color:var(--text);}
   .ssum-date{font-size:0.86rem;color:var(--text-sub);font-weight:600;margin-top:3px;}
@@ -214,12 +216,12 @@
   #annualContent .summary-card{padding:8px 6px;}
 
   .holiday-label-inline{display:inline-block;font-size:0.62rem;background:var(--red);color:#fff;padding:1px 5px;border-radius:3px;font-weight:700;}
-  .noallow-label-inline{display:inline-block;font-size:0.62rem;background:#cfd1c5;color:#5d6152;padding:1px 5px;border-radius:3px;font-weight:700;}
+  .noallow-label-inline{display:inline-block;font-size:0.62rem;background:var(--border2);color:var(--text-sub);padding:1px 5px;border-radius:3px;font-weight:700;}
 
   .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding:0 12px;}
   .year-selector{display:flex;align-items:center;gap:6px;}
   .stat-nav{display:flex;align-items:center;gap:8px;}
-  .stat-nav-label{font-size:0.9rem;font-weight:800;color:#3d4035;min-width:80px;text-align:center;}
+  .stat-nav-label{font-size:0.9rem;font-weight:800;color:var(--text);min-width:80px;text-align:center;}
   .page-title{font-size:0.95rem;font-weight:800;color:var(--text);}
   select{background:var(--white);border:1.5px solid var(--border2);color:var(--text);
     padding:5px 10px;border-radius:8px;font-family:'Noto Sans KR',sans-serif;
@@ -248,7 +250,7 @@
   .legend-dot.hong{background:var(--hong);}
   .legend-dot.holiday{background:var(--red);}
   .legend-dot.all{background:var(--yellow);}
-  .legend-dot.noallow{background:#d5d7cc;}
+  .legend-dot.noallow{background:#5a5e51;}
 
   /* 연차 태그 */
   .leave-tag{display:flex;align-items:center;justify-content:center;font-size:clamp(0.3rem,2.2vw,0.62rem);font-weight:600;
@@ -256,10 +258,10 @@
   .leave-tag.lee{background:#eeaab5;color:#fff;border:1px solid #e399a5;
     width:100%;padding:1px 2px;font-size:0.72rem;font-weight:600;line-height:1.15;
     flex-direction:column;gap:0;overflow:visible;}
-  .leave-tag.shin{font-size:clamp(0.3rem,2.2vw,0.58rem);color:#fff;background:#aeb0a3;
-    border:1px solid #a1a396;padding:0px 3px;line-height:1.1;font-weight:700;white-space:nowrap;overflow:hidden;}
-  .leave-tag.hong{font-size:clamp(0.3rem,2.2vw,0.58rem);color:#fff;background:#aeb0a3;
-    border:1px solid #a1a396;padding:0px 3px;line-height:1.1;font-weight:700;white-space:nowrap;overflow:hidden;}
+  .leave-tag.shin{font-size:clamp(0.3rem,2.2vw,0.58rem);color:#fff;background:#5f6357;
+    border:1px solid #6c7063;padding:0px 3px;line-height:1.1;font-weight:700;white-space:nowrap;overflow:hidden;}
+  .leave-tag.hong{font-size:clamp(0.3rem,2.2vw,0.58rem);color:#fff;background:#5f6357;
+    border:1px solid #6c7063;padding:0px 3px;line-height:1.1;font-weight:700;white-space:nowrap;overflow:hidden;}
 
   /* 연차 모달 */
   .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:200;align-items:center;justify-content:center;}
@@ -273,8 +275,8 @@
     font-family:'Noto Sans KR',sans-serif;font-size:0.82rem;font-weight:600;
     cursor:pointer;margin-bottom:6px;color:var(--text);}
   .modal-btn:last-child{margin-bottom:0;}
-  .modal-btn.active-leave{background:#eaf0e1;border-color:#9cb487;color:#55703f;}
-  .modal-btn.active-swap{background:#faf4e2;border-color:#d4b46a;color:#7a6635;}
+  .modal-btn.active-leave{background:#24301f;border-color:#5f7a4c;color:#b4cf9c;}
+  .modal-btn.active-swap{background:#332d1e;border-color:#d4b46a;color:#e0c98f;}
   .modal-salary{background:var(--surface2);border-radius:8px;padding:10px 12px;
     margin-bottom:12px;border:1px solid var(--border);}
   .modal-salary .sal-title{font-size:1rem;color:var(--text-muted);margin-bottom:6px;font-weight:600;}
@@ -319,27 +321,27 @@
     font-size:0.75rem;padding:5px 0;border-bottom:1px solid var(--border);}
   .leave-log-item:last-child{border-bottom:none;}
   .leave-log-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-auto-flow:row;gap:3px 2px;}
-  .leave-log-cell{font-size:clamp(0.4rem,2.4vw,0.7rem);font-weight:600;color:var(--text-sub);background:var(--red-bg);border:1px solid #ead2cd;border-radius:5px;padding:4px 0;text-align:center;white-space:nowrap;letter-spacing:-0.4px;line-height:1.2;overflow:hidden;}
-  .leave-log-cell.borrowed{background:#faf1dc;border-color:#e8d6a6;color:#8a7442;}
-  .leave-borrow-note{display:inline-flex;align-items:center;gap:4px;margin-left:8px;font-size:0.62rem;font-weight:600;color:#8a7442;}
-  .leave-borrow-note i{display:inline-block;width:9px;height:9px;border-radius:2px;background:#faf1dc;border:1px solid #e8d6a6;}
+  .leave-log-cell{font-size:clamp(0.4rem,2.4vw,0.7rem);font-weight:600;color:var(--text-sub);background:var(--red-bg);border:1px solid #5a3530;border-radius:5px;padding:4px 0;text-align:center;white-space:nowrap;letter-spacing:-0.4px;line-height:1.2;overflow:hidden;}
+  .leave-log-cell.borrowed{background:#332d1e;border-color:#5a4e2e;color:#d9bf85;}
+  .leave-borrow-note{display:inline-flex;align-items:center;gap:4px;margin-left:8px;font-size:0.62rem;font-weight:600;color:#d9bf85;}
+  .leave-borrow-note i{display:inline-block;width:9px;height:9px;border-radius:2px;background:#332d1e;border:1px solid #5a4e2e;}
   .leave-log-cell.empty{background:var(--surface2);border:1px dashed var(--border);}
   .leave-log-date{color:var(--text-sub);font-weight:500;}
   .leave-log-badge{background:var(--red-bg);color:var(--red);font-size:0.65rem;
-    font-weight:700;padding:1px 6px;border-radius:4px;border:1px solid #ebc9c3;}
+    font-weight:700;padding:1px 6px;border-radius:4px;border:1px solid #5a3530;}
   .cal-nav-bar{display:flex;align-items:center;justify-content:center;gap:36px;
     padding:4px 10px;background:var(--white);border-bottom:1px solid var(--border);}
 
   .setting-menu{display:none;position:fixed;top:58px;left:8px;z-index:500;
-    background:#ffffff;border:1px solid #e3e4dc;border-radius:10px;
+    background:var(--white);border:1px solid var(--border);border-radius:10px;
     box-shadow:0 4px 20px rgba(0,0,0,0.2);min-width:200px;overflow:hidden;}
-  .setting-title{font-size:0.72rem;font-weight:700;color:#9a9d8c;
-    padding:10px 16px 8px;border-bottom:1px solid #e3e4dc;background:#f1f2ec;}
+  .setting-title{font-size:0.72rem;font-weight:700;color:var(--text-muted);
+    padding:10px 16px 8px;border-bottom:1px solid var(--border);background:var(--surface2);}
   .setting-item{display:block;width:100%;text-align:left;
-    background:#ffffff;border:none;border-bottom:1px solid #f1f2ec;
+    background:var(--white);border:none;border-bottom:1px solid var(--surface2);
     padding:13px 16px;font-family:'Noto Sans KR',sans-serif;font-size:0.85rem;
-    font-weight:600;color:#3d4035;cursor:pointer;}
-  .setting-msg{font-size:0.72rem;color:#6f8a5c;padding:8px 16px;display:none;background:#f1f2ec;}
+    font-weight:600;color:var(--text);cursor:pointer;}
+  .setting-msg{font-size:0.72rem;color:#93b07c;padding:8px 16px;display:none;background:var(--surface2);}
 
   .menu-dim{display:none;position:fixed;inset:0;z-index:499;background:rgba(0,0,0,0.3);}
 
@@ -347,7 +349,7 @@
     border-radius:10px;border:1.5px solid var(--border);background:var(--white);
     font-family:'Noto Sans KR',sans-serif;font-size:0.75rem;font-weight:600;
     cursor:pointer;color:var(--text);-webkit-user-select:none;user-select:none;}
-  .modal-btn-sm.active-leave{background:#eaf0e1;border-color:#9cb487;color:#55703f;}
+  .modal-btn-sm.active-leave{background:#24301f;border-color:#5f7a4c;color:#b4cf9c;}
   .drag-swap-btn{touch-action:none;}
 
   /* 내보내기/가져오기 */
@@ -375,8 +377,8 @@
 <!-- 데이터 관리 모달 -->
 <div id="menuDim" onclick="closeMenu()" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.4);"></div>
 <div id="settingMenu" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1000;
-  background:#fff;border-radius:20px;box-shadow:0 8px 40px rgba(0,0,0,0.2);width:320px;max-width:90vw;padding:24px 20px;font-family:'Noto Sans KR',sans-serif;">
-  <div style="text-align:center;font-size:1rem;font-weight:800;color:#3d4035;margin-bottom:20px;">⚙️ 데이터 관리</div>
+  background:var(--white);border-radius:20px;box-shadow:0 8px 40px rgba(0,0,0,0.2);width:320px;max-width:90vw;padding:24px 20px;font-family:'Noto Sans KR',sans-serif;">
+  <div style="text-align:center;font-size:1rem;font-weight:800;color:var(--text);margin-bottom:20px;">⚙️ 데이터 관리</div>
 
   <!-- 근무 요일 설정 -->
   <button onclick="openSchedSetting()" style="width:100%;padding:12px;border-radius:12px;border:none;margin-bottom:12px;
@@ -385,9 +387,9 @@
   </button>
 
   <!-- 내보내기 -->
-  <div style="background:#f7f7f3;border-radius:12px;padding:16px;margin-bottom:12px;">
-    <div style="font-size:0.82rem;font-weight:700;color:#3d4035;margin-bottom:4px;">📤 내보내기</div>
-    <div style="font-size:0.72rem;color:#9a9d8c;margin-bottom:12px;">아래 버튼을 눌러 데이터를 복사하세요</div>
+  <div style="background:var(--bg);border-radius:12px;padding:16px;margin-bottom:12px;">
+    <div style="font-size:0.82rem;font-weight:700;color:var(--text);margin-bottom:4px;">📤 내보내기</div>
+    <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:12px;">아래 버튼을 눌러 데이터를 복사하세요</div>
     <button onclick="exportData()" style="width:100%;padding:12px;border-radius:10px;border:none;
       background:#8fa67a;color:#fff;font-family:'Noto Sans KR',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;">
       📤 내보내기
@@ -395,21 +397,21 @@
   </div>
 
   <!-- 가져오기 -->
-  <div style="background:#f7f7f3;border-radius:12px;padding:16px;margin-bottom:16px;">
-    <div style="font-size:0.82rem;font-weight:700;color:#3d4035;margin-bottom:4px;">📥 가져오기</div>
-    <div style="font-size:0.72rem;color:#9a9d8c;margin-bottom:12px;">Schedule.json 파일을 선택하세요</div>
-    <button onclick="document.getElementById('importFile').click()" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid #e3e4dc;
-      background:#fff;color:#3d4035;font-family:'Noto Sans KR',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;">
+  <div style="background:var(--bg);border-radius:12px;padding:16px;margin-bottom:16px;">
+    <div style="font-size:0.82rem;font-weight:700;color:var(--text);margin-bottom:4px;">📥 가져오기</div>
+    <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:12px;">Schedule.json 파일을 선택하세요</div>
+    <button onclick="document.getElementById('importFile').click()" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--border);
+      background:var(--white);color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;">
       📂 파일 선택해서 가져오기
     </button>
     <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
   </div>
 
-  <div id="settingMsg" style="display:none;font-size:0.75rem;color:#6f8a5c;text-align:center;margin-bottom:10px;font-weight:600;"></div>
+  <div id="settingMsg" style="display:none;font-size:0.75rem;color:#93b07c;text-align:center;margin-bottom:10px;font-weight:600;"></div>
 
   <!-- 닫기 -->
   <button onclick="closeMenu()" style="width:100%;padding:12px;border-radius:10px;border:none;
-    background:#f1f2ec;color:#9a9d8c;font-family:'Noto Sans KR',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;">
+    background:var(--surface2);color:var(--text-muted);font-family:'Noto Sans KR',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;">
     닫기
   </button>
 </div>
@@ -453,7 +455,7 @@
         </button>
       </div>
 
-      <div style="border-top:2px solid #cfd1c5;margin:10px 0 8px;"></div>
+      <div style="border-top:2px solid var(--border2);margin:10px 0 8px;"></div>
 
       <!-- 근무변경 드래그 버튼 -->
       <div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);margin-bottom:6px;">근무자 변경</div>
@@ -469,11 +471,11 @@
         </button>
       </div>
 
-      <div style="border-top:2px solid #cfd1c5;margin:8px 0;"></div>
+      <div style="border-top:2px solid var(--border2);margin:8px 0;"></div>
       <button class="modal-cancel" onclick="closeModal()">닫기</button>
       <button id="swapCancelModalBtn" onclick="cancelSwapFromModal()" style="display:none;
-        width:100%;margin-top:6px;padding:9px;border-radius:10px;border:1.5px solid #c2665e;
-        background:#fbf0ee;color:#c2665e;font-family:'Noto Sans KR',sans-serif;
+        width:100%;margin-top:6px;padding:9px;border-radius:10px;border:1.5px solid #e0847b;
+        background:#3a2522;color:#e0847b;font-family:'Noto Sans KR',sans-serif;
         font-size:0.78rem;font-weight:700;cursor:pointer;">근무변경 취소</button>
     </div>
   </div>
@@ -481,29 +483,29 @@
   <!-- 2단계: 드롭 후 대상 날짜 근무자 선택 모달 -->
   <div id="swapTargetModal" style="display:none;position:fixed;inset:0;z-index:700;
     background:rgba(0,0,0,0.45);align-items:center;justify-content:center;">
-    <div style="background:#ffffff;border-radius:16px;padding:20px;width:280px;max-width:90vw;
+    <div style="background:var(--white);border-radius:16px;padding:20px;width:280px;max-width:90vw;
       box-shadow:0 8px 40px rgba(0,0,0,0.2);font-family:'Noto Sans KR',sans-serif;">
-      <div style="font-size:0.9rem;font-weight:800;color:#3d4035;margin-bottom:4px;text-align:center;">근무자 변경</div>
-      <div id="swapTargetDateLabel" style="font-size:0.72rem;color:#9a9d8c;text-align:center;margin-bottom:14px;"></div>
+      <div style="font-size:0.9rem;font-weight:800;color:var(--text);margin-bottom:4px;text-align:center;">근무자 변경</div>
+      <div id="swapTargetDateLabel" style="font-size:0.72rem;color:var(--text-muted);text-align:center;margin-bottom:14px;"></div>
       <div id="swapTargetBtns" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;"></div>
-      <button onclick="closeSwapTargetModal()" style="width:100%;padding:9px;border-radius:10px;border:1.5px solid #e3e4dc;
-        background:#fff;color:#9a9d8c;font-family:'Noto Sans KR',sans-serif;font-size:0.82rem;cursor:pointer;">취소</button>
+      <button onclick="closeSwapTargetModal()" style="width:100%;padding:9px;border-radius:10px;border:1.5px solid var(--border);
+        background:var(--white);color:var(--text-muted);font-family:'Noto Sans KR',sans-serif;font-size:0.82rem;cursor:pointer;">취소</button>
     </div>
   </div>
 
   <!-- 최종 확인 모달 -->
   <div id="dragConfirmModal" style="display:none;position:fixed;inset:0;z-index:800;
     background:rgba(0,0,0,0.45);align-items:center;justify-content:center;">
-    <div style="background:#ffffff;border-radius:16px;padding:24px 20px;width:300px;max-width:90vw;
+    <div style="background:var(--white);border-radius:16px;padding:24px 20px;width:300px;max-width:90vw;
       box-shadow:0 8px 40px rgba(0,0,0,0.2);font-family:'Noto Sans KR',sans-serif;">
-      <div style="font-size:0.95rem;font-weight:800;color:#3d4035;margin-bottom:8px;text-align:center;">근무를 변경하시겠습니까?</div>
-      <div id="dragConfirmInfo" style="font-size:0.78rem;color:#6a6d5c;text-align:center;margin-bottom:20px;line-height:1.7;
-        background:#f1f2ec;border-radius:8px;padding:10px;"></div>
+      <div style="font-size:0.95rem;font-weight:800;color:var(--text);margin-bottom:8px;text-align:center;">근무를 변경하시겠습니까?</div>
+      <div id="dragConfirmInfo" style="font-size:0.78rem;color:var(--text-sub);text-align:center;margin-bottom:20px;line-height:1.7;
+        background:var(--surface2);border-radius:8px;padding:10px;"></div>
       <div style="display:flex;gap:8px;">
         <button onclick="confirmDragSwap()" style="flex:1;padding:11px;border-radius:10px;border:none;
           background:#8fa67a;color:#fff;font-family:'Noto Sans KR',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;">변경</button>
-        <button onclick="cancelDragSwap()" style="flex:1;padding:11px;border-radius:10px;border:1.5px solid #e3e4dc;
-          background:#fff;color:#6a6d5c;font-family:'Noto Sans KR',sans-serif;font-size:0.88rem;font-weight:600;cursor:pointer;">취소</button>
+        <button onclick="cancelDragSwap()" style="flex:1;padding:11px;border-radius:10px;border:1.5px solid var(--border);
+          background:var(--white);color:var(--text-sub);font-family:'Noto Sans KR',sans-serif;font-size:0.88rem;font-weight:600;cursor:pointer;">취소</button>
       </div>
     </div>
   </div>
@@ -561,14 +563,14 @@
     <div style="width:100%;max-width:360px;">
       <div id="stockSummaryCard" class="ssum-card"></div>
       <button onclick="closeStockSummary()" style="display:block;margin:12px auto 0;padding:9px 28px;border-radius:10px;border:none;
-        background:rgba(255,255,255,0.9);color:var(--text-sub);font-family:'Noto Sans KR',sans-serif;font-size:0.84rem;font-weight:700;cursor:pointer;">닫기</button>
+        background:rgba(40,43,37,0.92);color:var(--text-sub);font-family:'Noto Sans KR',sans-serif;font-size:0.84rem;font-weight:700;cursor:pointer;">닫기</button>
     </div>
   </div>
 
   <!-- 재고 모달 -->
   <div id="repairModal" style="display:none;position:fixed;inset:0;z-index:700;
     background:rgba(0,0,0,0.45);align-items:flex-end;justify-content:center;">
-    <div style="background:#ffffff;border-radius:20px 20px 0 0;padding:16px 16px 32px;
+    <div style="background:var(--white);border-radius:20px 20px 0 0;padding:16px 16px 32px;
       width:100%;max-width:500px;max-height:95vh;overflow-y:auto;
       box-shadow:0 -4px 24px rgba(0,0,0,0.15);font-family:'Noto Sans KR',sans-serif;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
@@ -1701,13 +1703,13 @@ function renderGhostCell(cy,cm,cd){
     wHtml+=`<span class="leave-tag lee"><span>이주형</span><span>연차</span></span>`;
   } else if(swapInfo&&swapInfo.leeWork){
     const color=swapInfo.color||'#9cc5a8';
-    wHtml+=`<span class="worker-tag lee" style="position:relative;"><span class="swap-icon" style="background:${color};color:#3d4035;">⇄</span><span>이주형</span><span>근무</span></span>`;
+    wHtml+=`<span class="worker-tag lee" style="position:relative;"><span class="swap-icon" style="background:${color};color:#2a2c26;">⇄</span><span>이주형</span><span>근무</span></span>`;
   } else if(swapInfo&&swapInfo.to==='lee'){
     const color=swapInfo.color||'#9cc5a8';
     if(swapInfo.toState==='off'){
       wHtml+=`<span class="lee-off-tag"><span>이주형</span><span>휴무</span></span>`;
     } else {
-      wHtml+=`<span class="worker-tag lee" style="position:relative;"><span class="swap-icon" style="background:${color};color:#3d4035;">⇄</span><span>이주형</span><span>근무</span></span>`;
+      wHtml+=`<span class="worker-tag lee" style="position:relative;"><span class="swap-icon" style="background:${color};color:#2a2c26;">⇄</span><span>이주형</span><span>근무</span></span>`;
     }
   } else if(workers.some(w=>w.key==='lee')){
     wHtml+=`<span class="worker-tag lee"><span>이주형</span><span>근무</span></span>`;
@@ -1721,9 +1723,9 @@ function renderGhostCell(cy,cm,cd){
     if(isSwapTo){
       const color=swapInfo.color||'#9cc5a8';
       if(swapInfo.toState==='off'){
-        wHtml+=`<span class="off-small-tag" style="position:relative;"><span class="swap-icon" style="background:${color};color:#3d4035;">⇄</span>${NAME_MAP[wkey]} 휴무</span>`;
+        wHtml+=`<span class="off-small-tag" style="position:relative;"><span class="swap-icon" style="background:${color};color:#2a2c26;">⇄</span>${NAME_MAP[wkey]} 휴무</span>`;
       } else {
-        wHtml+=`<span class="worker-tag ${wkey}" style="position:relative;"><span class="swap-icon" style="background:${color};color:#3d4035;">⇄</span>${NAME_MAP[wkey]} 근무</span>`;
+        wHtml+=`<span class="worker-tag ${wkey}" style="position:relative;"><span class="swap-icon" style="background:${color};color:#2a2c26;">⇄</span>${NAME_MAP[wkey]} 근무</span>`;
       }
     } else if(isSwapFrom){
       wHtml+=`<span class="off-small-tag">${NAME_MAP[wkey]} 휴무</span>`;
@@ -1866,14 +1868,14 @@ function renderCalendar(slideDir){
       html+=`<span class="leave-tag lee"><span>이주형</span><span>연차</span></span>`;
     } else if(swapLeeWork){
       const color=swapInfo.color||'#9cc5a8';
-      html+=`<span class="worker-tag lee" style="position:relative;"><span class="swap-icon" style="background:${color};color:#3d4035;">⇄</span><span>이주형</span><span>근무</span></span>`;
+      html+=`<span class="worker-tag lee" style="position:relative;"><span class="swap-icon" style="background:${color};color:#2a2c26;">⇄</span><span>이주형</span><span>근무</span></span>`;
     } else if(swapInfo&&swapInfo.to==='lee'){
       const color=swapInfo.color||'#9cc5a8';
       // toState: 이주형이 이 날로 들어올 때의 원래 상태
       if(swapInfo.toState==='off'){
-        html+=`<span class="lee-off-tag" style="position:relative;"><span class="swap-icon" style="background:${color};color:#3d4035;">⇄</span><span>이주형</span><span>휴무</span></span>`;
+        html+=`<span class="lee-off-tag" style="position:relative;"><span class="swap-icon" style="background:${color};color:#2a2c26;">⇄</span><span>이주형</span><span>휴무</span></span>`;
       } else {
-        html+=`<span class="worker-tag lee" style="position:relative;"><span class="swap-icon" style="background:${color};color:#3d4035;">⇄</span><span>이주형</span><span>근무</span></span>`;
+        html+=`<span class="worker-tag lee" style="position:relative;"><span class="swap-icon" style="background:${color};color:#2a2c26;">⇄</span><span>이주형</span><span>근무</span></span>`;
       }
     } else {
       const leeWorks=workers.some(w=>w.key==='lee');
@@ -1901,9 +1903,9 @@ function renderCalendar(slideDir){
         const color=swapInfo.color||'#9cc5a8';
         // toState: 이 날로 들어온 사람의 원래 상태
         if(swapInfo.toState==='off'){
-          midOff.push(`<span class="off-small-tag" style="position:relative;"><span class="swap-icon" style="background:${color};color:#3d4035;">⇄</span>${NAME_MAP[wkey]} 휴무</span>`);
+          midOff.push(`<span class="off-small-tag" style="position:relative;"><span class="swap-icon" style="background:${color};color:#2a2c26;">⇄</span>${NAME_MAP[wkey]} 휴무</span>`);
         } else {
-          midWork.push(`<span class="worker-tag ${wkey}" style="position:relative;"><span class="swap-icon" style="background:${color};color:#3d4035;">⇄</span>${NAME_MAP[wkey]} 근무</span>`);
+          midWork.push(`<span class="worker-tag ${wkey}" style="position:relative;"><span class="swap-icon" style="background:${color};color:#2a2c26;">⇄</span>${NAME_MAP[wkey]} 근무</span>`);
         }
       } else if(isSwapFrom){
         midOff.push(`<span class="off-small-tag">${NAME_MAP[wkey]} 휴무</span>`);
@@ -2413,7 +2415,7 @@ function renderStock(){
   }
   let html='';
   stockItems.forEach((item,i)=>{
-    const statusColor=item.qty<=item.min?'#c2665e':item.qty<=item.min*2?'#d4b46a':'#8fa67a';
+    const statusColor=item.qty<=item.min?'#e0847b':item.qty<=item.min*2?'#d4b46a':'#8fa67a';
     const statusText=item.qty<=item.min?'부족':'충분';
     html+=`<div style="background:var(--white);border:1px solid var(--border);border-radius:12px;
       padding:12px 14px;margin-bottom:10px;display:flex;align-items:center;gap:10px;">
@@ -2432,7 +2434,7 @@ function renderStock(){
           background:var(--surface2);font-size:1rem;font-weight:700;cursor:pointer;color:var(--text);">+</button>
       </div>
       <button onclick="deleteStock(${i})" style="width:28px;height:28px;border-radius:8px;border:none;
-        background:#f8ece9;color:#c2665e;font-size:0.75rem;font-weight:700;cursor:pointer;">✕</button>
+        background:#3a2522;color:#e0847b;font-size:0.75rem;font-weight:700;cursor:pointer;">✕</button>
     </div>`;
   });
   content.innerHTML=html;
@@ -2577,26 +2579,26 @@ function renderRepairModal(){
     html+=`<div style="display:flex;align-items:center;background:var(--white);
       border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin-bottom:8px;gap:8px;">
       <div style="font-size:1rem;font-weight:800;color:var(--text);min-width:40px;line-height:1.1;text-align:center;">${size}${repairCat==='suit'&&SUIT_SIZE_EN[size]?`<div style="font-size:0.66rem;font-weight:700;color:var(--text-muted);">${SUIT_SIZE_EN[size]}</div>`:''}</div>
-      <div style="font-size:1.2rem;font-weight:900;color:${qty>0?'var(--accent)':'#c9cabd'};min-width:36px;text-align:center;">${qty}</div>
+      <div style="font-size:1.2rem;font-weight:900;color:${qty>0?'var(--accent)':'#5a5e51'};min-width:36px;text-align:center;">${qty}</div>
       <div style="display:flex;gap:5px;flex:1;justify-content:flex-end;flex-wrap:wrap;">
         <button ontouchstart="changeRepairCount(${size},-10)" onclick="changeRepairCount(${size},-10)"
-          style="padding:6px 8px;border-radius:8px;border:1px solid #ebc9c3;background:#fbf0ee;
+          style="padding:6px 8px;border-radius:8px;border:1px solid #5a3530;background:#3a2522;
           font-size:0.72rem;font-weight:700;color:#c27a72;cursor:pointer;">−10</button>
         <button ontouchstart="changeRepairCount(${size},-5)" onclick="changeRepairCount(${size},-5)"
-          style="padding:6px 8px;border-radius:8px;border:1px solid #ebc9c3;background:#fbf0ee;
+          style="padding:6px 8px;border-radius:8px;border:1px solid #5a3530;background:#3a2522;
           font-size:0.72rem;font-weight:700;color:#c27a72;cursor:pointer;">−5</button>
         <button ontouchstart="changeRepairCount(${size},-1)" onclick="changeRepairCount(${size},-1)"
           style="padding:6px 8px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);
           font-size:0.72rem;font-weight:700;color:var(--text);cursor:pointer;">−1</button>
         <button ontouchstart="changeRepairCount(${size},1)" onclick="changeRepairCount(${size},1)"
-          style="padding:6px 8px;border-radius:8px;border:1px solid #c9d6ba;background:#eef3e7;
-          font-size:0.72rem;font-weight:700;color:#6f8a5c;cursor:pointer;">+1</button>
+          style="padding:6px 8px;border-radius:8px;border:1px solid #3e5232;background:#24301f;
+          font-size:0.72rem;font-weight:700;color:#93b07c;cursor:pointer;">+1</button>
         <button ontouchstart="changeRepairCount(${size},5)" onclick="changeRepairCount(${size},5)"
-          style="padding:6px 8px;border-radius:8px;border:1px solid #c9d6ba;background:#eef3e7;
-          font-size:0.72rem;font-weight:700;color:#6f8a5c;cursor:pointer;">+5</button>
+          style="padding:6px 8px;border-radius:8px;border:1px solid #3e5232;background:#24301f;
+          font-size:0.72rem;font-weight:700;color:#93b07c;cursor:pointer;">+5</button>
         <button ontouchstart="changeRepairCount(${size},10)" onclick="changeRepairCount(${size},10)"
-          style="padding:6px 8px;border-radius:8px;border:1px solid #c9d6ba;background:#eef3e7;
-          font-size:0.72rem;font-weight:700;color:#6f8a5c;cursor:pointer;">+10</button>
+          style="padding:6px 8px;border-radius:8px;border:1px solid #3e5232;background:#24301f;
+          font-size:0.72rem;font-weight:700;color:#93b07c;cursor:pointer;">+10</button>
       </div>
     </div>`;
   });
